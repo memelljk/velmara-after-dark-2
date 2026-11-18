@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Velmara After Dark — a rain-soaked open-world crime game</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%230b0e1a'/%3E%3Ccircle cx='8' cy='8' r='5' fill='%23ff4fa3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="./nightcity.css">
+</head>
+<body>
+<div id="stage"></div>
+
+<div id="hud" class="hidden">
+  <div id="topbar">
+    <div id="wallet"><span id="cash">$0</span><span id="rep">REP 0 · ROOKIE</span></div>
+    <div id="clockbox"><span id="clock">21:00</span><span id="district">Neon Mile</span></div>
+    <div id="stars" aria-label="wanted level"></div>
+  </div>
+  <div id="objective" class="hidden"><div id="obj-title"></div><div id="obj-sub"></div></div>
+  <div id="bustedwrap" class="hidden"><div id="bustedlabel">BUSTED</div><div id="bustedbar"><div id="bustedfill"></div></div></div>
+  <div id="vitals">
+    <div id="healthbar"><div id="healthfill"></div></div>
+    <div id="armorbar"><div id="armorfill"></div></div>
+    <div id="speedo" class="hidden"><span id="speed">0</span><small>km/h</small></div>
+    <div id="ammo" class="hidden"><span id="mag">12</span><small>/ <span id="reserve">∞</span></small></div>
+    <div id="radio" class="hidden">♪ <span id="station">Radio Off</span></div>
+  </div>
+  <canvas id="minimap" width="180" height="180"></canvas>
+  <div id="prompt" class="hidden"></div>
+  <div id="toast" class="hidden"></div>
+  <div id="crosshair" class="hidden"></div>
+</div>
+
+<div id="dialogue" class="hidden">
+  <div id="dlg-name"></div>
+  <div id="dlg-text"></div>
+  <div id="dlg-hint">Click or press E to continue</div>
+</div>
+
+<div id="shopmenu" class="hidden">
+  <div id="shop-title"></div>
+  <div id="shop-items"></div>
+  <div id="shop-foot">↑ ↓ choose · Enter buy · E / Esc close</div>
+</div>
+
+<div id="bigmap" class="hidden">
+  <canvas id="bigmap-canvas" width="760" height="760"></canvas>
+  <div id="bigmap-foot">VELMARA — P or Esc to close</div>
+</div>
+
+<div id="title">
+  <div id="title-inner">
+    <div id="logo">VELMARA</div>
+    <div id="logo-sub">AFTER DARK</div>
+    <p id="tagline">Rain on neon. Cash in the trunk. Twelve jobs between Jax Rook and the city limits.</p>
+    <button id="btn-new">NEW GAME</button>
+    <button id="btn-continue" class="hidden">CONTINUE</button>
+    <div id="controls-note">WASD move · Mouse orbit · E interact / enter car · F or Enter also enters · Shift sprint ·
+      Space handbrake · Click shoot · Q melee · R radio · P map · M mute · Esc pause</div>
+  </div>
+</div>
+
+<div id="pause" class="hidden">
+  <div id="pause-inner">
+    <div id="pause-title">PAUSED</div>
+    <button id="btn-resume">RESUME</button>
+    <button id="btn-save">SAVE GAME</button>
+    <button id="btn-quit">QUIT TO TITLE</button>
+    <div id="pause-stats"></div>
+  </div>
+</div>
+
+<div id="endcard" class="hidden">
+  <div id="end-title">WASTED</div>
+  <div id="end-sub"></div>
+</div>
+
+<p id="status" role="status" aria-live="polite"></p>
+
+<script src="./vendor/three.min.js"></script>
+<script src="./src/geobake.js"></script>
+<script src="./src/cityforge.js"></script>
+<script src="./src/motors.js"></script>
+<script src="./src/jax.js"></script>
+<script src="./src/crowd.js"></script>
+<script src="./src/heat.js"></script>
+<script src="./src/combat.js"></script>
+<script src="./src/campaign.js"></script>
+<script src="./src/overlay.js"></script>
+<script src="./src/soundwave.js"></script>
+<script src="./src/shotrig.js"></script>
+<script src="./src/darkrun.js"></script>
+</body>
+</html>

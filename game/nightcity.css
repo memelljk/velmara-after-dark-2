@@ -1,0 +1,80 @@
+/* Velmara After Dark — nightcity.css: wet-neon HUD and menu styling. */
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #070912; font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif; color: #eef2ff; }
+#stage, #stage canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+.hidden { display: none !important; }
+#status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+#hud { position: fixed; inset: 0; pointer-events: none; z-index: 5; }
+#topbar { position: absolute; top: 14px; left: 18px; right: 18px; display: flex; justify-content: space-between; align-items: flex-start; }
+#wallet { text-shadow: 0 2px 8px #000; }
+#cash { display: block; font-size: 30px; font-weight: 800; color: #7dff9a; letter-spacing: 1px; }
+#rep { display: block; font-size: 12px; font-weight: 700; color: #ffd76a; letter-spacing: 2px; margin-top: 2px; }
+#clockbox { text-align: center; text-shadow: 0 2px 8px #000; }
+#clock { display: block; font-size: 22px; font-weight: 800; letter-spacing: 3px; }
+#district { display: block; font-size: 12px; color: #8fd8ff; letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
+#stars { font-size: 26px; letter-spacing: 4px; color: #2c3350; text-shadow: 0 2px 6px #000; min-width: 170px; text-align: right; }
+#stars .lit { color: #ffd76a; text-shadow: 0 0 12px #ffb300; }
+
+#objective { position: absolute; top: 86px; left: 50%; transform: translateX(-50%); background: rgba(8,10,24,.78); border: 1px solid rgba(255,79,163,.65); border-left: 5px solid #ff4fa3; padding: 9px 18px; border-radius: 6px; text-align: center; max-width: 72vw; box-shadow: 0 6px 24px rgba(0,0,0,.55); }
+#obj-title { font-size: 17px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: #fff; }
+#obj-sub { font-size: 13px; color: #ffd76a; margin-top: 3px; letter-spacing: 1px; }
+
+#bustedwrap { position: absolute; top: 190px; left: 50%; transform: translateX(-50%); width: 300px; text-align: center; }
+#bustedlabel { font-size: 15px; font-weight: 800; letter-spacing: 6px; color: #ff5d5d; text-shadow: 0 0 10px #f00; }
+#bustedbar { height: 10px; background: rgba(255,255,255,.15); border: 1px solid rgba(255,93,93,.7); border-radius: 5px; overflow: hidden; margin-top: 4px; }
+#bustedfill { height: 100%; width: 0%; background: linear-gradient(90deg, #ff9d5c, #ff3b3b); }
+
+#vitals { position: absolute; right: 18px; bottom: 18px; width: 230px; text-align: right; }
+#healthbar, #armorbar { height: 13px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.35); border-radius: 6px; overflow: hidden; margin-top: 5px; }
+#healthfill { height: 100%; width: 100%; background: linear-gradient(90deg, #ff4f7a, #ff9d5c); transition: width .15s; }
+#armorfill { height: 100%; width: 0%; background: linear-gradient(90deg, #4fc3ff, #8fd8ff); transition: width .15s; }
+#speedo { margin-top: 8px; font-size: 15px; color: #cfe6ff; }
+#speedo #speed { font-size: 34px; font-weight: 800; color: #fff; }
+#ammo { margin-top: 4px; font-size: 15px; color: #ffe9a8; }
+#ammo #mag { font-size: 28px; font-weight: 800; color: #fff; }
+#radio { margin-top: 6px; font-size: 14px; font-weight: 700; color: #ff8fd0; letter-spacing: 1px; text-shadow: 0 0 8px rgba(255,79,163,.7); }
+
+#minimap { position: absolute; left: 18px; bottom: 18px; width: 180px; height: 180px; border-radius: 50%; border: 3px solid rgba(160,200,255,.55); box-shadow: 0 8px 30px rgba(0,0,0,.6), inset 0 0 24px rgba(0,0,0,.5); background: #0a0f22; }
+#prompt { position: absolute; left: 50%; bottom: 120px; transform: translateX(-50%); background: rgba(8,10,24,.85); border: 1px solid rgba(143,216,255,.6); padding: 8px 16px; border-radius: 20px; font-size: 15px; font-weight: 600; }
+#prompt b { color: #ffd76a; }
+#toast { position: absolute; left: 50%; bottom: 210px; transform: translateX(-50%); background: rgba(8,24,14,.88); border: 1px solid rgba(125,255,154,.6); color: #c9ffd4; padding: 9px 18px; border-radius: 6px; font-size: 15px; font-weight: 700; letter-spacing: 1px; }
+#crosshair { position: absolute; left: 50%; top: 50%; width: 14px; height: 14px; margin: -7px 0 0 -7px; border: 2px solid rgba(255,255,255,.85); border-radius: 50%; box-shadow: 0 0 6px #000; }
+
+#dialogue { position: fixed; left: 50%; bottom: 34px; transform: translateX(-50%); width: min(680px, 92vw); background: rgba(6,8,20,.92); border: 1px solid rgba(255,79,163,.7); border-radius: 10px; padding: 16px 20px 12px; z-index: 8; box-shadow: 0 12px 40px rgba(0,0,0,.7); cursor: pointer; }
+#dlg-name { font-size: 13px; font-weight: 800; letter-spacing: 3px; color: #ff8fd0; text-transform: uppercase; }
+#dlg-text { font-size: 18px; line-height: 1.45; margin-top: 6px; color: #f4f7ff; }
+#dlg-hint { font-size: 11px; color: #7f8db3; margin-top: 8px; letter-spacing: 1px; }
+
+#shopmenu { position: fixed; left: 50%; top: 50%; transform: translate(-50%,-50%); width: min(430px, 92vw); background: rgba(6,8,20,.95); border: 1px solid rgba(125,255,154,.6); border-radius: 12px; padding: 20px 22px; z-index: 9; box-shadow: 0 16px 50px rgba(0,0,0,.8); }
+#shop-title { font-size: 20px; font-weight: 800; letter-spacing: 2px; color: #7dff9a; }
+#shop-items { margin-top: 12px; }
+.shop-row { display: flex; justify-content: space-between; padding: 9px 10px; border-radius: 6px; font-size: 15px; }
+.shop-row.sel { background: rgba(125,255,154,.14); outline: 1px solid rgba(125,255,154,.5); }
+.shop-row .price { color: #ffd76a; font-weight: 700; }
+.shop-row .cant { color: #ff8a8a; }
+#shop-foot { margin-top: 12px; font-size: 12px; color: #7f8db3; letter-spacing: 1px; }
+
+#bigmap { position: fixed; inset: 0; background: rgba(4,6,14,.9); z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+#bigmap-canvas { border: 2px solid rgba(143,216,255,.5); border-radius: 10px; max-width: 92vw; max-height: 84vh; }
+#bigmap-foot { margin-top: 10px; font-size: 13px; letter-spacing: 3px; color: #8fd8ff; }
+
+#title { position: fixed; inset: 0; z-index: 20; display: flex; align-items: center; justify-content: center; background: radial-gradient(ellipse at 50% 120%, rgba(255,79,163,.20), transparent 60%), linear-gradient(180deg, rgba(5,6,16,.25) 0%, rgba(5,6,16,.78) 78%); }
+#title-inner { text-align: center; padding: 30px; }
+#logo { font-size: clamp(56px, 11vw, 118px); font-weight: 900; letter-spacing: 10px; color: #fff; text-shadow: 0 0 18px #ff4fa3, 0 0 60px rgba(255,79,163,.8), 4px 4px 0 #123; line-height: 1; }
+#logo-sub { font-size: clamp(20px, 4vw, 40px); font-weight: 800; letter-spacing: 26px; color: #8fd8ff; text-shadow: 0 0 16px rgba(79,195,255,.9); margin-top: 6px; }
+#tagline { margin: 22px auto 26px; max-width: 520px; font-size: 16px; color: #d7e2ff; text-shadow: 0 2px 8px #000; }
+#title button, #pause button { display: block; margin: 10px auto; width: 260px; padding: 13px 0; font-size: 17px; font-weight: 800; letter-spacing: 3px; color: #0b0e1a; background: linear-gradient(180deg, #ffd76a, #ffb300); border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 8px 24px rgba(0,0,0,.5); }
+#title button:hover, #pause button:hover { filter: brightness(1.1); }
+#btn-continue { background: linear-gradient(180deg, #8fd8ff, #4fc3ff) !important; }
+#controls-note { margin: 24px auto 0; max-width: 560px; font-size: 12.5px; line-height: 1.7; color: #9fb2d8; text-shadow: 0 1px 4px #000; }
+
+#pause { position: fixed; inset: 0; z-index: 20; display: flex; align-items: center; justify-content: center; background: rgba(4,6,14,.72); }
+#pause-inner { text-align: center; }
+#pause-title { font-size: 44px; font-weight: 900; letter-spacing: 14px; margin-bottom: 18px; }
+#pause-stats { margin-top: 16px; font-size: 14px; color: #9fb2d8; line-height: 1.8; }
+
+#endcard { position: fixed; inset: 0; z-index: 30; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(10,2,4,.66); }
+#end-title { font-size: clamp(52px, 10vw, 104px); font-weight: 900; letter-spacing: 18px; color: #ff3b3b; text-shadow: 0 0 30px rgba(255,0,0,.7); }
+#endcard.busted #end-title { color: #8fd8ff; text-shadow: 0 0 30px rgba(79,195,255,.7); }
+#end-sub { font-size: 17px; color: #e8eeff; margin-top: 10px; text-shadow: 0 2px 8px #000; }
