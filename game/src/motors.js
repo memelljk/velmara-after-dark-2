@@ -29,8 +29,8 @@ window.VAD = window.VAD || {};
     body.box(0, 0.55, 0, W, 0.62, L, paint, 0);                              // shell
     body.box(0, 0.32, L * 0.30, W * 0.94, 0.28, L * 0.22, V.shade(paint, 0.8), 0); // nose
     if (typeKey === 'pickup') {
-      body.box(0, 1.05, -L * 0.18, W * 0.92, 0.55, L * 0.34, V.shade(paint, 0.92), 0); // cab
-      body.box(0, 0.86, L * 0.22, W * 0.94, 0.3, L * 0.4, V.shade(paint, 0.7), 0);     // bed walls
+      body.box(0, 1.05, L * 0.16, W * 0.92, 0.55, L * 0.34, V.shade(paint, 0.92), 0);  // cab (front, +z)
+      body.box(0, 0.86, -L * 0.24, W * 0.94, 0.3, L * 0.4, V.shade(paint, 0.7), 0);    // bed walls (rear)
     } else if (typeKey === 'van') {
       body.box(0, 1.12, L * 0.05, W * 0.96, 1.05, L * 0.78, V.shade(paint, 0.95), 0);
     } else {
@@ -73,9 +73,9 @@ window.VAD = window.VAD || {};
       color: 0xffeeb8, transparent: true, opacity: 0.04,
       fog: false, side: THREE.FrontSide, depthWrite: false,
     });
-    const cone = new THREE.Mesh(new THREE.ConeGeometry(1.5, 9, 12, 1, true), mat);
+    const cone = new THREE.Mesh(new THREE.ConeGeometry(1.15, 7, 12, 1, true), mat);
     cone.rotation.x = Math.PI / 2 + 0.06;
-    cone.position.set(0, 0.62, 6.4);
+    cone.position.set(0, 0.62, 5.4);
     return cone;
   }
 

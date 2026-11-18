@@ -273,18 +273,21 @@ window.VAD = window.VAD || {};
       scene.add(s); signs.push(s);
       glow.flat(x + nx * 8.5, 0.09, z + nz * 8.5, 4.2, 4.2, color);
     }
+    // Each storefront sign faces the street its customers arrive from (the
+    // nearest road), lettering outward — verified in the captures.
+    const SIGN_YAW = { arms: Math.PI, garage: Math.PI / 2, stitch: -Math.PI / 2, noodle: 0, pawn: Math.PI, clinic: -Math.PI / 2 };
     SHOPS.forEach(function (s) {
-      // Face the nearest road: pick yaw by which side the road lies on.
-      let ry = 0;
-      if (Math.abs(s.x) % 120 > 60) ry = Math.PI; // rough outward choice, signs verified in captures
-      storefront(s.x, s.z, s.color, s.sign, ry);
+      storefront(s.x, s.z, s.color, s.sign, SIGN_YAW[s.id] || 0);
     });
+    const SAFE_YAW = { loft: 0, bunk: Math.PI / 2, flat: Math.PI / 2 };
     SAFEHOUSES.forEach(function (s) {
       solid.box(s.x, 4.2, s.z, 11, 8.4, 8, 0x465064, 0);
       solid.box(s.x, 8.8, s.z, 12, 0.7, 9, 0x8fd8ff, 0);
       colliders.push({ x: s.x, z: s.z, hw: 5.5, hd: 4 });
+      const ry = SAFE_YAW[s.id] || 0;
       const sg = V.neonSign('SAFEHOUSE', '#8fd8ff', 9, 2.2);
-      sg.position.set(s.x, 6.4, s.z + 4.15);
+      sg.position.set(s.x + Math.sin(ry) * 4.15, 6.4, s.z + Math.cos(ry) * 4.15);
+      sg.rotation.y = ry;
       scene.add(sg); signs.push(sg);
     });
     // Odile's booth on the Neon Mile.
@@ -305,7 +308,7 @@ window.VAD = window.VAD || {};
     solid.box(-6, 2.2, -306, 0.35, 4.4, 0.35, 0x555a6a, 0);
     const limits = V.neonSign('VELMARA CITY LIMITS', '#ffd76a', 15, 3);
     limits.position.set(0, 5.4, -306);
-    limits.rotation.y = Math.PI;
+    limits.rotation.y = 0; // faces +z, toward drivers arriving from the city
     scene.add(limits); signs.push(limits);
 
     // Bake the merged static world: two draw calls for almost everything.
