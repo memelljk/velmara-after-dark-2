@@ -83,13 +83,14 @@ window.VAD = window.VAD || {};
       vest: !!opts.officer,
       badge: !!opts.officer,
     });
-    mesh.position.set(x, 0, z);
+    mesh.position.set(x, opts.y || 0, z);
     G.city.scene.add(mesh);
     const f = {
       mesh: mesh, x: x, z: z, heading: 0, hp: opts.officer ? 80 : 100,
       dead: false, isThug: !opts.officer, isOfficer: !!opts.officer,
       shootAt: G.time + 1 + Math.random() * 1.5, strafeDir: Math.random() < 0.5 ? 1 : -1,
-      walkPhase: Math.random() * 6, speed: opts.officer ? 3.6 : 3.1,
+      walkPhase: Math.random() * 6, speed: opts.static ? 0 : (opts.officer ? 3.6 : 3.1),
+      yBase: opts.y || 0,
     };
     G.thugs.push(f);
     return f;
@@ -118,7 +119,7 @@ window.VAD = window.VAD || {};
         f.walkPhase += dt * 9;
       }
       f.heading = V.turnToward(f.heading, Math.atan2(px - f.x, pz - f.z), dt * 10);
-      f.mesh.position.set(f.x, Math.abs(Math.sin(f.walkPhase)) * 0.06, f.z);
+      f.mesh.position.set(f.x, (f.yBase || 0) + Math.abs(Math.sin(f.walkPhase)) * 0.06, f.z);
       f.mesh.rotation.y = f.heading;
       if (d < 34 && G.time >= f.shootAt && G.state === 'play') {
         f.shootAt = G.time + 0.9 + Math.random() * 1.1;

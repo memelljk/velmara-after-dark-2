@@ -64,8 +64,9 @@ window.VAD = window.VAD || {};
       const len = Math.sqrt(mx * mx + mz * mz);
       mx /= len; mz /= len;
       const sin = Math.sin(camYaw), cos = Math.cos(camYaw);
-      const wx = mx * cos - mz * sin;
-      const wz = -mx * sin - mz * cos;
+      // Camera forward is (sin, cos); screen-right is (-cos, sin).
+      const wx = -mx * cos + mz * sin;
+      const wz = mx * sin + mz * cos;
       const sp = 6.4 * sprint;
       const fixed = G.city.collide(p.x + wx * sp * dt, p.z + wz * sp * dt, 0.7);
       p.x = fixed[0]; p.z = fixed[1];
